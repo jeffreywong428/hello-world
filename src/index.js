@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
-import App from './App';
+import App from './App'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <div>
-    <App name="我是進度條">在index.js中轉換百分比</App>
-  </div>, 
-  document.getElementById('root')
-);    
+    <div>
+        <App/>
+        <div id="talk"></div>
+    </div>,
+    document.getElementById('root')
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
