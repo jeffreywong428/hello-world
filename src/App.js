@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      repoName: null
+    };
+    
+    this.handleClick=this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    fetch ("https://api.github.com/users/jserv/repos", {method:"GET"})
+    .then(res => res.json())
+    .then(data => {
+      this.setState({repoName: data[0]["name"]})
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  }
+
+
+  render(){
+    return (
+      <div>
+        <div>
+          {(this.state.repoName===null ? "目前還有沒有資料" : this.state.repoName)}
+        </div>
+        <button onClick={this.handleClick}>取得jserv以英文字母排序的第一個repo</button>
+      </div>
+    )
+  };
 }
 
 export default App;
