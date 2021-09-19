@@ -1,35 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Baby from './Baby'
 
-class App extends Component{
-  constructor(props) {
-    super(props);
-    this.state={
-      rate:"",
-      isBorn:true
+const App=()=>{
+    const [dad, setDad] = useState("Chang");
+    const [born, setBorn] = useState(true);
+    
+    const changeDad=()=>{
+      if(dad==="Chang"){
+        setDad("Wang")
+      }
+      else{
+        setDad("Chang")
+      }
     }
-    this.handleClick=this.handleClick.bind(this);
-    this.spawnBaby=this.spawnBaby.bind(this);
-  }
 
-  handleClick(){
-    this.setState({isBorn:!this.state.isBorn})
-  }
-
-  spawnBaby(){
-    if(this.state.isBorn)
-      return <Baby/>
-  }
-
-    render(){
-        return(
-          <div>
-            <button onClick={this.handleClick}>
-                {(this.state.isBorn===true)?"讓他回去肚子裡":"讓他生"} 
-            </button>
-              {this.spawnBaby()}
-          </div>
-        );
+    const spawnBaby=()=>{
+      if(born===true){
+        return <Baby dad={dad}/>;
+      }
     }
+
+    return(
+      <div>
+        {spawnBaby()}
+        <div id="talk"></div>
+        <button onClick={changeDad}>換爸爸!</button>
+        <button onClick={()=>{setBorn(!born)}}>{(born===true)?"讓他回去肚子裡":"讓他生"}</button>
+      </div>
+    );
 }
 export default App;
