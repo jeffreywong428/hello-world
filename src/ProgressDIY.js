@@ -1,32 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
+import useRate from './useRate.js';
+
 const ProgressDIY = (props) => {
 
-    const [percent, setPercent] = useState(0);
-    const tmIncrease = useRef();
-    const tmDecrease = useRef();
-
-    const mounted = useRef();
-    useEffect(() => {
-        if (!mounted.current) {
-            setPercent(props.value);
-            mounted.current = true;
-        } else {
-            //decreasing
-            if (percent > props.value) {
-                if (tmIncrease.current)
-                    clearTimeout(tmIncrease.current);
-
-                tmDecrease.current = setTimeout(() => setPercent(percent - 1), 20);
-            }
-            //Increasing
-            else if (percent < props.value) {
-                if (tmDecrease.current)
-                    clearTimeout(tmDecrease.current);
-
-                tmIncrease.current = setTimeout(() => setPercent(percent + 1), 20);
-            }
-        }
-    }, [percent, props.value]);
+    const percent = useRate(props.value);
 
     return (
         <div>
