@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'
+
+import LoginForm from './LoginForm';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <div>
-        <App />
+        <LoginForm />
     </div>,
     document.getElementById('root')
 );
