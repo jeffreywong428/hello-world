@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
-import ProgressDIY from './ProgressDIY'
-import Cheer from './Cheer';
+import React from 'react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import FirstPage from './FirstPage';
+import SecondPage from './SecondPage';
+import Layout from './Layout';
 
 const App = () => {
-  const [value, setValue] = useState(10);
-  const [score, setScore] = useState(10);
 
   return (
-    <div id="App">
-      <ProgressDIY value={value} onClick={(e) => { setValue(e.target.value) }} />
-      <Cheer value={score} onClick={(e) => { setScore(e.target.value)}}></Cheer>
-    </div>
+    <HashRouter>
+      <Switch>
+        <Layout>
+          <Route exact path="/" component={FirstPage} />
+          <Route path="/second" render={()=><SecondPage id={5} />} />
+        </Layout>
+      </Switch>
+    </HashRouter>
   );
 }
+
 export default App;
